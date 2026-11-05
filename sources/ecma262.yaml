@@ -1,0 +1,36 @@
+id: ecma262
+name: "ECMAScript / ECMA-262"
+site_no: "27"
+home: "https://tc39.es/ecma262/"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: npm
+  url: "@tc39/ecma262-biblio"
+  version: latest      # npm dist-tag or exact version; the exact version goes into snapshot_version
+  checksum_url: null
+refresh: "P7D"
+langs: [en]
+kind_default: spec_section
+stable_id: biblio_id    # clause id; term: "term:<term>"
+check: "index_lookup"
+license:
+  class: open
+  url: "https://github.com/tc39/ecma262/blob/main/LICENSE.md"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Ecma International"
+rate_limit: { rps: null, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "Math.pow", expect: "sec-math.pow" }
+  - { query: "thenable", expect: "term:thenable" }
+contact: null
+notice: |
+  ECMA-262 biblio (@tc39/ecma262-biblio) © Ecma International.
+  Natural language text is licensed under the Alternative copyright notice of the Ecma text copyright policy:
+  https://ecma-international.org/policies/by-ipr/ecma-text-copyright-policy/#alternative-copyright-notice
+  Source code is licensed under the Ecma International Policy on Submission, Inclusion and Licensing of Software:
+  https://www.ecma-international.org/memento/Policies/Ecma_Policy_on_Submission_Inclusion_and_Licensing_of_Software.htm
+notes: "Each package release is pinned: snapshot_version holds the exact npm version, and the tarball is verified against the registry integrity value. Includes term (variants → alt) and clause (label without the signature: `Math.pow ( base, exponent )` → `Math.pow`). Biblio contains no definition text, so snippet: none; the release's NOTICE.md contains the copyright notice."

@@ -1,0 +1,29 @@
+id: iate
+name: "IATE"
+site_no: "2"
+home: "https://iate.europa.eu/"
+mode: index
+status: active
+iteration: 6
+fetch:
+  method: http_zip
+  url: "https://iate.europa.eu/em-api/artifacts/full-tbx"
+  checksum_url: null
+refresh: "P30D"
+langs: [en, bg]
+kind_default: concept
+stable_id: iate_id
+check: "index_lookup"
+license:
+  class: open
+  url: "https://iate.europa.eu/legal-notice"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Download IATE, European Union, 2019"
+rate_limit: { rps: 1, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "local area network", expect: "794344" }
+  - { query: "защитна стена", expect: "176235" }
+contact: null
+notes: "The public full TBX export (`full-tbx` redirects to S3 `IATE_download.zip`, exported on 2019-02-26) is the only export available anonymously; a current export is an asynchronous job available only to signed-in users. Streamed parsing, English and Bulgarian filtering, and exclusion of terms with reliability 1. The export has no definitions, so there are no snippets. The live API by ID serves as a fallback check (iteration 7)."

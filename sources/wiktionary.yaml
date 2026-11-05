@@ -1,0 +1,41 @@
+id: wiktionary
+name: "Wiktionary EN/BG"
+site_no: "5"
+home: "https://en.wiktionary.org/"
+mode: index
+status: active
+iteration: 6
+fetch:
+  method: mediawiki_category
+  wikis:
+    - lang: en
+      api: "https://en.wiktionary.org/w/api.php"
+      category: "Category:English lemmas"
+      url: "https://en.wiktionary.org/wiki/"
+      anchor: English
+    - lang: bg
+      api: "https://bg.wiktionary.org/w/api.php"
+      category: "Категория:Думи в българския език"
+      url: "https://bg.wiktionary.org/wiki/"
+live:
+  api: "https://{lang}.wiktionary.org/w/api.php"
+  auth: none
+  secret: null
+refresh: "P14D"
+langs: [en, bg]
+kind_default: term
+stable_id: title
+check: "api_by_id"
+license:
+  class: cc_by_sa
+  url: "https://en.wiktionary.org/wiki/Wiktionary:Copyrights"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Wiktionary contributors, CC BY-SA 4.0"
+rate_limit: { rps: 2, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "hash table", expect: "en:hash table" }
+  - { query: "компютър", expect: "bg:компютър" }
+contact: null
+notes: "Index + live: The index stores only English lemma titles — members of Category:English lemmas (~885,000), retrieved via list=categorymembers. The all-titles-in-ns0 dump contains approximately 9 million titles across multiple languages and word forms, making it unsuitable. A pageid-based check verifies in real time that each entry contains an English language section."

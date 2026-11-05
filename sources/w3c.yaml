@@ -1,0 +1,27 @@
+id: w3c
+name: "W3C (specifications)"
+site_no: "8"
+home: "https://www.w3.org/TR/"
+mode: live
+status: active
+iteration: 7
+fetch: null
+live:
+  api: "https://api.w3.org/"
+  auth: none
+  secret: null
+refresh: null
+langs: [en]
+kind_default: document
+stable_id: shortname
+check: "api_by_id"
+license:
+  class: open
+  url: "https://www.w3.org/copyright/document-license-2023/"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "W3C"
+rate_limit: { rps: 10, daily: null }
+guards: { max_row_drop: 0.2 }
+contact: null
+notes: "Live provider (providers/w3c.py). The API does not support search: the full list of ~1,700 specifications is fetched once (2 requests) and searched locally by title and shortname; retired specifications are excluded. Only links to full specifications are provided; W3C terms come from webref. API rate limit: 6,000 requests per 10 minutes."

@@ -1,0 +1,27 @@
+id: wikidata
+name: "Wikidata / Wikipedia"
+site_no: "3"
+home: "https://www.wikidata.org/"
+mode: live
+status: active
+iteration: 7
+fetch: null
+live:
+  api: "https://www.wikidata.org/w/api.php"
+  auth: none
+  secret: null
+refresh: null
+langs: [en, bg]
+kind_default: concept
+stable_id: qid
+check: "api_by_id"
+license:
+  class: cc_by_sa
+  url: "https://www.wikidata.org/wiki/Wikidata:Licensing"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "Wikidata (CC0) / Wikipedia contributors (CC BY-SA 4.0)"
+rate_limit: { rps: 1, daily: null }
+guards: { max_row_drop: 0.2 }
+contact: null
+notes: "Live provider (providers/wikidata.py). Uses wbsearchentities + sitelinks; only includes entries with an English or Bulgarian Wikipedia article. Article URLs are retrieved from sitelinks. Dumps exceed 2 GB and are not included in the index. Snippets are generated solely from Wikidata descriptions (CC0), not Wikipedia article text. Requires a User-Agent with contact information."

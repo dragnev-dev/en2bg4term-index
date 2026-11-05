@@ -1,0 +1,30 @@
+id: webref
+name: "WHATWG + W3C definitions (Webref)"
+site_no: "9"
+home: "https://github.com/w3c/webref"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: git_sparse
+  url: "https://github.com/w3c/webref"
+  branch: curated
+  checksum_url: null
+refresh: "P1D"
+langs: [en]
+kind_default: spec_section
+stable_id: spec_anchor  # <shortname>#<dfn id>
+check: "index_lookup"
+license:
+  class: cc_by
+  url: "https://whatwg.org/ipr-policy"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "WHATWG (CC BY 4.0); W3C specifications — W3C Document License"
+rate_limit: { rps: null, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "shadow root", expect: "dom#concept-shadow-root" }
+  - { query: "Access-Control-Allow-Origin", expect: "fetch#http-access-control-allow-origin" }
+contact: null
+notes: "Branch-curated, shallow sparse clone of ed/dfns/ and ed/index.json. Only WHATWG and W3C specifications (excluding discontinued ones); only public, non-informative definitions without `for`, restricted to the types listed in ingest/webref.py. Licensing depends on the specification (WHATWG CC BY 4.0, W3C Document License) — the license is stored in each record's extra field. Definitions do not include definition text, so snippet: none. The hash covers the definitions and the fields used from index.json (crawl dates change daily)."

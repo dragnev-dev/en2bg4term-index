@@ -1,0 +1,27 @@
+id: lexit
+name: "ЛЕКСИТ (ИБЕ при БАН)"
+site_no: "1"
+home: "https://ibl.bas.bg/dictionary_portal/"
+mode: live
+status: active
+iteration: 7
+fetch: null
+live:
+  api: "https://ibl.bas.bg/dictionary_portal/"
+  auth: none
+  secret: null
+refresh: null
+langs: [bg]
+kind_default: term
+stable_id: search_url
+check: "http_anchor"
+license:
+  class: restricted
+  url: "https://ibl.bas.bg/dictionary_portal/"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Институт за български език „Проф. Любомир Андрейчин“ – БАН"
+rate_limit: { rps: 0.2, daily: 500 }
+guards: { max_row_drop: 0.2 }
+contact: "Institute for Bulgarian Language — permission request letter"
+notes: "Live provider (providers/lexit.py). No API or export is available; links point to result pages at /dictionary_portal/lang/bg/<word>, for Cyrillic queries only. Check = nonempty result. All rights reserved: links only, no text."
