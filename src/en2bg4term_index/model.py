@@ -123,3 +123,21 @@ class Source:
 
 def load_registry(sources_dir: Path) -> dict[str, Source]:
     return {s.id: s for s in map(Source.load, sorted(sources_dir.glob("*.yaml")))}
+
+
+def catalog(registry: dict[str, Source]) -> dict[str, dict[str, Any]]:
+    """What ``Registry.describe`` needs from each yaml; written to the package as ``catalog.json``.
+
+    The yaml files are not installed with the library, so this copy is. Regenerate it
+    with ``idx catalog`` after editing ``sources/``; a test fails while it is stale.
+    """
+    return {
+        s.id: {
+            "name": s.name,
+            "home": s.raw.get("home"),
+            "mode": "live" if s.mode == "live" else "index",
+            "langs": s.langs,
+            "kind": s.kind_default,
+        }
+        for s in registry.values()
+    }

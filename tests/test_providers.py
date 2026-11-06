@@ -1,14 +1,14 @@
 import json
 import sqlite3
 from compression import zstd
-from dataclasses import replace
+from dataclasses import fields, replace
 from pathlib import Path
 
 import pytest
 
 from en2bg4term_index import providers
 from en2bg4term_index.build import combine, create_db, manifest, write_entries
-from en2bg4term_index.contract import Candidate, CheckResult, LinkRecord, Provider
+from en2bg4term_index.contract import Candidate, CheckResult, LinkRecord, Provider, SourceInfo
 from en2bg4term_index.model import Entry, IndexVersionError, Label
 from en2bg4term_index.providers import load_providers
 from en2bg4term_index.release import ReleaseError, unpack_index
@@ -156,3 +156,40 @@ def test_unpack_index_verifies_sha(tmp_path: Path, index: Path) -> None:
     bad.write_text(json.dumps(manifest(index) | {"schema_version": "99"}))
     with pytest.raises(IndexVersionError):
         unpack_index(archive, bad, tmp_path / "x.sqlite")
+
+
+def test_describe_lists_registered_sources(two_sources: Path) -> None:
+    with load_providers(two_sources, env={}, live=False) as registry:
+        infos = registry.describe()
+    assert [i.id for i in infos] == ["demo", "python_glossary"]
+    python = infos[1]
+    assert python == SourceInfo(
+        id="python_glossary",
+        name=python.name,
+        home=python.home,
+        mode="index",
+        langs=("en",),
+        kind="term",
+        snapshot_version="index-two",
+    )
+    assert python.name and python.home
+    # not in catalog.json: still described, from what the registry knows
+    assert infos[0] == SourceInfo("demo", "demo", None, "index", (), "", "index-two")
+
+
+def test_describe_marks_live_sources(monkeypatch, index: Path) -> None:
+    monkeypatch.setattr(providers, "LIVE_PROVIDERS", {"fake_live": f"{__name__}:FakeLive"})
+    with load_providers(index, env={"FAKE_KEY": "k"}) as registry:
+        modes = {i.id: i.mode for i in registry.describe()}
+    assert modes == {"fake_live": "live", "python_glossary": "index"}
+
+
+def test_records_serialize_to_json(two_sources: Path) -> None:
+    with load_providers(two_sources, env={}, live=False) as registry:
+        hit = registry.search_all("decorator", translation="обвивка")[0]
+        info = registry.describe()[0]
+    for record in (hit, info, LinkRecord("demo", "x", DOC), CheckResult("moved", new_url=DOC)):
+        data = record.to_dict()
+        assert json.loads(json.dumps(data, ensure_ascii=False)) == data
+        assert set(data) == {f.name for f in fields(record)}
+    assert info.to_dict()["langs"] == []

@@ -1,15 +1,17 @@
 """``load_providers`` and the ``Registry`` that enrichment talks to."""
 
+import json
 import logging
 import os
 import sqlite3
 from collections.abc import Iterable, Mapping
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import replace
-from importlib import import_module
+from functools import cache
+from importlib import import_module, resources
 from pathlib import Path
 
-from en2bg4term_index.contract import MATCH_RANK, Candidate, CheckResult, LinkRecord, Provider
+from en2bg4term_index.contract import MATCH_RANK, Candidate, CheckResult, LinkRecord, Provider, SourceInfo
 from en2bg4term_index.providers.index import IndexProvider, open_index
 
 log = logging.getLogger(__name__)
@@ -29,6 +31,12 @@ LIVE_PROVIDERS: dict[str, str] = {
 INDEX_PROVIDERS: dict[str, str] = {
     "wiktionary": "en2bg4term_index.providers.wiktionary:WiktionaryProvider",
 }
+
+
+@cache
+def _catalog() -> dict[str, dict]:
+    """``catalog.json``: name, home, mode, langs and kind of every source in ``sources/``."""
+    return json.loads(resources.files("en2bg4term_index").joinpath("catalog.json").read_text(encoding="utf-8"))
 
 
 def _load(target: str) -> type:
@@ -51,6 +59,30 @@ class Registry:
         if self._conn is not None:
             self._conn.close()
             self._conn = None
+
+    def describe(self) -> list[SourceInfo]:
+        """The registered sources, by id: what ``search_all(sources=...)`` and ``check`` accept.
+
+        Only sources this registry can answer for: a live source without its secret,
+        or every live source under ``live=False``, is left out.
+        """
+        infos = []
+        for sid in sorted(self.providers):
+            provider = self.providers[sid]
+            live = getattr(provider, "live", False) or sid in LIVE_PROVIDERS
+            meta = _catalog().get(sid) or {"name": sid, "mode": "live" if live else "index", "langs": [], "kind": ""}
+            infos.append(
+                SourceInfo(
+                    id=sid,
+                    name=meta["name"],
+                    home=meta.get("home"),
+                    mode=meta["mode"],
+                    langs=tuple(meta["langs"]),
+                    kind=meta["kind"],
+                    snapshot_version=getattr(provider, "snapshot_version", None),
+                )
+            )
+        return infos
 
     def _select(self, sources: Iterable[str] | None) -> list[Provider]:
         if sources is None:

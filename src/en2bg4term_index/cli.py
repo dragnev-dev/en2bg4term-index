@@ -1,4 +1,4 @@
-"""``idx`` command line: build shards, combine, query, check, fetch a release, write the manifest.
+"""``idx`` command line: build shards, combine, query, check, fetch a release, write the manifest or catalog.
 
 ``plan`` / ``shard`` / ``assemble`` are the steps of ``refresh.yml``.
 """
@@ -7,13 +7,12 @@ import argparse
 import json
 import os
 import sys
-from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
 
 from en2bg4term_index.build import BuildError, combine, fetch_and_build, manifest
 from en2bg4term_index.contract import LinkRecord
-from en2bg4term_index.model import IndexVersionError, load_registry
+from en2bg4term_index.model import IndexVersionError, catalog, load_registry
 from en2bg4term_index.providers import load_providers
 from en2bg4term_index.refresh import FAILED, assemble, notice, plan, read_json, refresh_source, summary, write_json
 from en2bg4term_index.release import REPO, ReleaseError, download_release
@@ -57,7 +56,7 @@ def cmd_query(args: argparse.Namespace) -> int:
             per_source=args.per_source,
         )
     if args.json:
-        print(json.dumps([asdict(h) for h in hits], ensure_ascii=False, indent=2))
+        print(json.dumps([h.to_dict() for h in hits], ensure_ascii=False, indent=2))
     else:
         for h in hits:
             both = f"  [+ {h.also_matched}]" if h.also_matched else ""
@@ -68,7 +67,7 @@ def cmd_query(args: argparse.Namespace) -> int:
 def cmd_check(args: argparse.Namespace) -> int:
     with _registry(args) as registry:
         result = registry.check(LinkRecord(args.source, args.external_id, args.url))
-    print(json.dumps(asdict(result), ensure_ascii=False))
+    print(json.dumps(result.to_dict(), ensure_ascii=False))
     return 0 if result.status == "ok" else 1
 
 
@@ -85,6 +84,13 @@ def cmd_manifest(args: argparse.Namespace) -> int:
         args.output.write_text(text, encoding="utf-8")
     else:
         sys.stdout.write(text)
+    return 0
+
+
+def cmd_catalog(args: argparse.Namespace) -> int:
+    text = json.dumps(catalog(load_registry(args.sources_dir)), ensure_ascii=False, indent=2) + "\n"
+    args.output.write_text(text, encoding="utf-8")
+    print(f"{args.output}: written", file=sys.stderr)
     return 0
 
 
@@ -189,6 +195,11 @@ def parser() -> argparse.ArgumentParser:
     m.add_argument("--index", type=Path, default=Path("index.sqlite"))
     m.add_argument("-o", "--output", type=Path)
     m.set_defaults(func=cmd_manifest)
+
+    ct = sub.add_parser("catalog", help="write the package's catalog.json from sources/*.yaml")
+    ct.add_argument("--sources-dir", type=Path, default=Path("sources"))
+    ct.add_argument("-o", "--output", type=Path, default=Path("src/en2bg4term_index/catalog.json"))
+    ct.set_defaults(func=cmd_catalog)
 
     def refresh_args(sp: argparse.ArgumentParser) -> None:
         sp.add_argument("--sources-dir", type=Path, default=Path("sources"))
