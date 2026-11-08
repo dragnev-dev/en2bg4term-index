@@ -1,0 +1,29 @@
+id: owasp_genai
+name: "OWASP GenAI Security Project"
+site_no: "17b"
+home: "https://genai.owasp.org/"
+mode: index
+status: active
+iteration: 5
+fetch:
+  method: wp_rest
+  url: "https://genai.owasp.org/wp-json/wp/v2/"
+  checksum_url: null
+refresh: "P7D"
+langs: [en]
+kind_default: term
+stable_id: slug
+check: "index_lookup"
+license:
+  class: cc_by_sa
+  url: "https://genai.owasp.org/project-governance/"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "OWASP GenAI, CC BY-SA 4.0"
+rate_limit: { rps: 0.5, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "embeddings", expect: "glossaries/embeddings" }
+  - { query: "prompt injection", expect: "llmrisk/llm01-prompt-injection" }
+contact: null
+notes: "WordPress REST: post types glossaries (the glossary, with a separate page for each term) and llmrisk (the current OWASP Top 10 for LLM). Snippet comes from the excerpt with the repeated title removed."

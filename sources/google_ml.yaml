@@ -1,0 +1,29 @@
+id: google_ml
+name: "Google Machine Learning Glossary"
+site_no: "14"
+home: "https://developers.google.com/machine-learning/glossary"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: html_page
+  url: "https://developers.google.com/machine-learning/glossary"
+  checksum_url: null
+refresh: "P30D"
+langs: [en]
+kind_default: term
+stable_id: html_id
+check: "index_lookup"
+license:
+  class: cc_by
+  url: "https://developers.google.com/terms/site-policies"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "Google, CC BY 4.0"
+rate_limit: { rps: 0.5, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "accuracy", expect: "accuracy" }
+  - { query: "AUC", expect: "auc-area-under-the-roc-curve" }
+contact: null
+notes: "A single HTML page; only actual id attributes (h2.hide-from-toc). Topics (icons) are stored in extra.tags."

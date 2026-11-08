@@ -1,0 +1,30 @@
+id: eurovoc
+name: "EuroVoc"
+site_no: "22"
+home: "https://op.europa.eu/en/web/eu-vocabularies"
+mode: index
+status: active
+iteration: 6
+fetch:
+  method: cellar_sparql
+  sparql: "https://publications.europa.eu/webapi/rdf/sparql"
+  url: "https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/eurovoc"
+  checksum_url: null
+refresh: "P30D"
+langs: [en, bg]
+kind_default: concept
+stable_id: concept_uri
+check: "sparql_ask"
+license:
+  class: cc_by
+  url: "https://op.europa.eu/en/web/about-us/legal-notices/publications-office-of-the-european-union-copyright"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "EuroVoc, © Европейски съюз"
+rate_limit: { rps: 1, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "European Commission", expect: "http://eurovoc.europa.eu/4038" }
+  - { query: "Европейска комисия", expect: "http://eurovoc.europa.eu/4038" }
+contact: null
+notes: "SKOS Core from the latest release (Cellar SPARQL finds the release and its SKOS_CORE manifestation), with English and Bulgarian preferred and alternative labels. Snippet = English skos:definition (EU editorial text). The Cellar release has no separate license; the Publications Office's general reuse notice applies (attribution required). Check via SPARQL ASK at https://publications.europa.eu/webapi/rdf/sparql."

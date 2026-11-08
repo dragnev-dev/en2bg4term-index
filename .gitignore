@@ -1,0 +1,14 @@
+.venv/
+.idea/
+__pycache__/
+*.sqlite
+*.sqlite.zst
+/raw/
+/shards/
+/manifest.json
+/dist/
+/new/
+/previous/
+/report.json
+/summary.md
+/NOTICE.md

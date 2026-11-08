@@ -1,0 +1,29 @@
+id: etymonline
+name: "Online Etymology Dictionary"
+site_no: "20"
+home: "https://www.etymonline.com/"
+mode: index
+status: active
+iteration: 7
+fetch:
+  method: sitemap
+  url: "https://www.etymonline.com/sitemap.xml"
+  checksum_url: null
+refresh: "P30D"
+langs: [en]
+kind_default: term
+stable_id: lemma_path
+check: "index_lookup"
+license:
+  class: restricted
+  url: "https://www.etymonline.com/legal/terms"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Etymonline"
+rate_limit: { rps: 0.2, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "firewall", expect: "firewall" }
+  - { query: "e mail", expect: "e-mail" }
+contact: null
+notes: "Lemma → URL (/word/{lemma}) catalog only, from the sitemap (/sitemap.xml → /sitemaps/words-en.xml, ~47,000 lemmas); no content is stored. robots.txt permits /word/ and lists the sitemap. Internal /api/ routes are not used. The hash covers the lemmas because lastmod can change without a new word."

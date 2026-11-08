@@ -1,0 +1,259 @@
+{
+  "cambridge": {
+    "name": "Cambridge Dictionary",
+    "home": "https://dictionary.cambridge.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "cncf_glossary": {
+    "name": "CNCF Cloud Native Glossary",
+    "home": "https://glossary.cncf.io/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "ecma262": {
+    "name": "ECMAScript / ECMA-262",
+    "home": "https://tc39.es/ecma262/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "spec_section"
+  },
+  "eom": {
+    "name": "Encyclopedia of Mathematics",
+    "home": "https://encyclopediaofmath.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "etymonline": {
+    "name": "Online Etymology Dictionary",
+    "home": "https://www.etymonline.com/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "eurlex": {
+    "name": "EUR-Lex / Cellar",
+    "home": "https://eur-lex.europa.eu/",
+    "mode": "live",
+    "langs": [
+      "en",
+      "bg"
+    ],
+    "kind": "document"
+  },
+  "eurovoc": {
+    "name": "EuroVoc",
+    "home": "https://op.europa.eu/en/web/eu-vocabularies",
+    "mode": "index",
+    "langs": [
+      "en",
+      "bg"
+    ],
+    "kind": "concept"
+  },
+  "git_glossary": {
+    "name": "Git Glossary",
+    "home": "https://git-scm.com/docs/gitglossary",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "google_ml": {
+    "name": "Google Machine Learning Glossary",
+    "home": "https://developers.google.com/machine-learning/glossary",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "histdict": {
+    "name": "Старобългарски речник",
+    "home": "https://histdict.uni-sofia.bg/",
+    "mode": "index",
+    "langs": [
+      "bg"
+    ],
+    "kind": "term"
+  },
+  "iate": {
+    "name": "IATE",
+    "home": "https://iate.europa.eu/",
+    "mode": "index",
+    "langs": [
+      "en",
+      "bg"
+    ],
+    "kind": "concept"
+  },
+  "iec_electropedia": {
+    "name": "IEC Electropedia",
+    "home": "https://www.electropedia.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "concept"
+  },
+  "iso_obp": {
+    "name": "ISO Online Browsing Platform",
+    "home": "https://www.iso.org/obp/ui",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "lexit": {
+    "name": "ЛЕКСИТ (ИБЕ при БАН)",
+    "home": "https://ibl.bas.bg/dictionary_portal/",
+    "mode": "live",
+    "langs": [
+      "bg"
+    ],
+    "kind": "term"
+  },
+  "mdn": {
+    "name": "MDN Glossary",
+    "home": "https://developer.mozilla.org/en-US/docs/Glossary",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "mitre_cwe": {
+    "name": "MITRE CWE",
+    "home": "https://cwe.mitre.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "concept"
+  },
+  "nist_csrc": {
+    "name": "NIST CSRC Glossary",
+    "home": "https://csrc.nist.gov/glossary",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "nist_dads": {
+    "name": "NIST Dictionary of Algorithms and Data Structures",
+    "home": "https://xlinux.nist.gov/dads/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "owasp_cheatsheets": {
+    "name": "OWASP Cheat Sheet Series",
+    "home": "https://cheatsheetseries.owasp.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "document"
+  },
+  "owasp_genai": {
+    "name": "OWASP GenAI Security Project",
+    "home": "https://genai.owasp.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "postgresql_glossary": {
+    "name": "PostgreSQL Glossary",
+    "home": "https://www.postgresql.org/docs/current/glossary.html",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "python_glossary": {
+    "name": "Python Glossary",
+    "home": "https://docs.python.org/3/glossary.html",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "rfc_editor": {
+    "name": "RFC Editor",
+    "home": "https://www.rfc-editor.org/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "document"
+  },
+  "unicode_glossary": {
+    "name": "Unicode Glossary",
+    "home": "https://www.unicode.org/glossary/",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "term"
+  },
+  "w3c": {
+    "name": "W3C (specifications)",
+    "home": "https://www.w3.org/TR/",
+    "mode": "live",
+    "langs": [
+      "en"
+    ],
+    "kind": "document"
+  },
+  "webref": {
+    "name": "WHATWG + W3C definitions (Webref)",
+    "home": "https://github.com/w3c/webref",
+    "mode": "index",
+    "langs": [
+      "en"
+    ],
+    "kind": "spec_section"
+  },
+  "wikidata": {
+    "name": "Wikidata / Wikipedia",
+    "home": "https://www.wikidata.org/",
+    "mode": "live",
+    "langs": [
+      "en",
+      "bg"
+    ],
+    "kind": "concept"
+  },
+  "wiktionary": {
+    "name": "Wiktionary EN/BG",
+    "home": "https://en.wiktionary.org/",
+    "mode": "index",
+    "langs": [
+      "en",
+      "bg"
+    ],
+    "kind": "term"
+  }
+}

@@ -1,0 +1,29 @@
+id: git_glossary
+name: "Git Glossary"
+site_no: "24"
+home: "https://git-scm.com/docs/gitglossary"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: http_file
+  url: "https://raw.githubusercontent.com/git/git/master/Documentation/glossary-content.adoc"
+  checksum_url: null
+refresh: "P30D"
+langs: [en]
+kind_default: term
+stable_id: anchor
+check: "index_lookup"
+license:
+  class: copyleft
+  url: "https://github.com/git/git/blob/master/COPYING"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Git project, GPL-2.0-only"
+rate_limit: { rps: null, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "commit", expect: "def_commit" }
+  - { query: "committish", expect: "def_commit-ish" }
+contact: null
+notes: "Anchors def_…. `a, b, c` and `x (also y)` produce alternative labels. `Obsolete for: <<def_x>>` → status redirect + replaced_by, and the original name becomes a redirect label for the target. GPL text in the release asset requires a separate GPL-compatible file, so there is no snippet yet."

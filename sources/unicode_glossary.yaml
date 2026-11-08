@@ -1,0 +1,29 @@
+id: unicode_glossary
+name: "Unicode Glossary"
+site_no: "11"
+home: "https://www.unicode.org/glossary/"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: html_page
+  url: "https://www.unicode.org/glossary/"
+  checksum_url: null
+refresh: "P30D"
+langs: [en]
+kind_default: term
+stable_id: html_id
+check: "index_lookup"
+license:
+  class: restricted
+  url: "https://www.unicode.org/copyright.html"
+  checked_at: 2026-10-14
+snippet_policy: none
+attribution: "Unicode, Inc."
+rate_limit: { rps: 0.5, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "byte order mark", expect: "byte_order_mark" }
+  - { query: "code point", expect: "code_point" }
+contact: null
+notes: "A single HTML page; only actual id attributes (<p id> with a self-link pointing to the same id). Links are explicitly allowed, but text is not: snippet: none. Only 'Acronym for …' may be read from the definition for the alt label."

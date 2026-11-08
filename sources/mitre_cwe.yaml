@@ -1,0 +1,36 @@
+id: mitre_cwe
+name: "MITRE CWE"
+site_no: "18"
+home: "https://cwe.mitre.org/"
+mode: index
+status: active
+iteration: 4
+fetch:
+  method: http_zip
+  url: "https://cwe.mitre.org/data/xml/cwec_latest.xml.zip"
+  checksum_url: null
+refresh: "P7D"
+langs: [en]
+kind_default: concept
+stable_id: cwe_id
+check: "index_lookup"
+license:
+  class: open
+  url: "https://cwe.mitre.org/about/termsofuse.html"
+  checked_at: 2026-10-14
+snippet_policy: short
+attribution: "CWE™ © The MITRE Corporation"
+rate_limit: { rps: 1, daily: null }
+guards: { max_row_drop: 0.2 }
+golden:
+  - { query: "XSS", expect: "CWE-79" }
+  - { query: "CWE-89", expect: "CWE-89" }
+contact: null
+notice: |
+  CWE™ © The MITRE Corporation. CWE is a trademark of The MITRE Corporation.
+  CWE Terms of Use (https://cwe.mitre.org/about/termsofuse.html): CWE is free to use by any organization or
+  individual for any research, development, and/or commercial purposes, per these CWE Terms of Use. Accordingly,
+  The MITRE Corporation hereby grants you a non-exclusive, royalty-free license to use CWE for research,
+  development, and commercial purposes. Any copy you make for such purposes is authorized on the condition that you
+  reproduce MITRE's copyright designation and this license in any such copy.
+notes: "Weakness, Category, View; external_id `CWE-<n>` is also an alternative label. Alternate_Terms → alt. Deprecated → status deprecated; replaced_by only when the text identifies exactly one active entry that is not a View. Obsolete remains active (the page still exists); Status is stored in extra. The release's NOTICE.md contains MITRE's copyright notice and Terms of Use."
